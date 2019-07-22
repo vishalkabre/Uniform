@@ -10,17 +10,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.training.generics.ApplicationMethods;
 import com.training.generics.ScreenShot;
 import com.training.pom.LoginPOM;
+import com.training.pom.UniformPOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginTest {
+public class UniformLogin_Test {
 
 
 	private WebDriver driver; 
 	private String baseUrl; 
-	private LoginPOM loginPOM; 
+	private UniformPOM uniformPOM; 
 	private static Properties properties; 
 	private ScreenShot screenShot; 
 	
@@ -35,7 +37,7 @@ public class LoginTest {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new LoginPOM(driver); 
+		uniformPOM = new UniformPOM(driver); 
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		driver.get(baseUrl);
@@ -44,15 +46,20 @@ public class LoginTest {
 	@AfterMethod
 	public void tearDown() throws Exception {
 		Thread.sleep(5000);
-		driver.quit();
+		//driver.quit();
 	}
 	
 	@Test
 	public void loginPassTest() {
-			loginPOM.sendUserName("admin");
-			loginPOM.sendPassword("admin@123");
-			loginPOM.clickLoginBtn(); 
-			screenShot.captureScreenShot("First");
+		ApplicationMethods appmeth = new ApplicationMethods(driver);
+		appmeth.login();
+		System.out.println("Admin logged in in system");
+	//	appmeth.deleteOrder();
+		//System.out.println("Order is deleted");
+		appmeth.recurring_OrderFilter();
+		//appmeth.return_Order();
+		System.out.println("recurring_Order Filtered");
+		screenShot.captureScreenShot("First");
 	}
 	
 	
