@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UniformSuite">
+	<test name="TestsimpleTestCases">
+		<groups>
+			<run>
+				<include name="simpleTestCases" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.training.sanity.tests.UniformLogin_Test" />
+		</classes>
+	</test>
+	<!-- <test name="UniformTestmediumTestCases">
+		<groups>
+			<run>
+				<include name="mediumTestCases" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.training.sanity.tests.UniformLogin_Test" />
+		</classes>
+	</test> -->
+</suite>

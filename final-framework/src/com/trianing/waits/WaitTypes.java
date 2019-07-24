@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * 
- * @author Naveen
+ * @author Vishal
  * @see  this class shall have explicit wait for any location 
       	any type on either present, visibility etc 
    		and participants can have more of these explicitWait depending on requirement 
@@ -67,7 +67,8 @@ public class WaitTypes {
 			WebDriverWait wait = new WebDriverWait(driver, timeout);
 			WebElement element  = wait.until(
 					ExpectedConditions.visibilityOf(locator));
-			System.out.println("Element Located");
+		
+			// System.out.println("Element Located");
 			
 			return element;
 		}catch(Exception e ){

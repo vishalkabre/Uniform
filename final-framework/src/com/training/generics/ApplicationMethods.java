@@ -8,12 +8,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.training.pom.LoginPOM;
 import com.training.pom.UniformPOM;
+import com.training.pom.UniformProductReturns_POM;
+import com.training.pom.UniformRecurringOrders_POM;
+import com.training.pom.UniformOrder_POM;
 
 public class ApplicationMethods {
 	WebDriver driver ; 
 	private UniformPOM uniformPOM; 
-	
+	private LoginPOM loginPOM;
+	private UniformOrder_POM uniformorderPOM; 
+	private UniformRecurringOrders_POM uniformrecurringorderPOM; 
+	private UniformProductReturns_POM uniformproductreturnPOM; 
+
+
 	public ApplicationMethods(WebDriver driver){
 		this.driver = driver;
 	}
@@ -32,7 +41,7 @@ public class ApplicationMethods {
 			element = driver.findElement(By.xpath(locator));
 		}
 		if(checkSingleEntry(locator, type)){
-			System.out.println("Element Found and Returned");
+			//System.out.println("Element Found and Returned");
 			return element;
 		}	
 		System.out.println("Sorry Element not found, so not returned...");
@@ -77,27 +86,27 @@ public class ApplicationMethods {
 	}
 	
 	public void login(){
-		uniformPOM = new UniformPOM(driver); 
-		uniformPOM.sendUserName("admin");
-		uniformPOM.sendPassword("admin@123");
-		uniformPOM.clickLoginBtn(); 		
+		loginPOM = new LoginPOM(driver); 
+		loginPOM.sendUserName("admin");
+		loginPOM.sendPassword("admin@123");
+		loginPOM.clickLoginBtn(); 		
 	}
 	
 	public void deleteOrder(){
-		uniformPOM = new UniformPOM(driver); 
-		uniformPOM.cart_Order();
+		uniformorderPOM = new UniformOrder_POM(driver);
+		uniformorderPOM.cart_Order();
 
 	}
 	
 	public void recurring_OrderFilter(){
-		uniformPOM = new UniformPOM(driver); 
-		uniformPOM.recurring_Order();
+		uniformrecurringorderPOM = new UniformRecurringOrders_POM(driver); 
+		uniformrecurringorderPOM.recurring_Order();
 
 	}
 	
 	public void return_Order(){
-		uniformPOM = new UniformPOM(driver); 
-		uniformPOM.return_Order();
+		uniformproductreturnPOM = new UniformProductReturns_POM(driver); 
+		uniformproductreturnPOM.return_Order();
 
 	}
 }

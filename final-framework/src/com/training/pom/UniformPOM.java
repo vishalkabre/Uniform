@@ -17,14 +17,14 @@ public class UniformPOM {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(id="input-username")
+/*	@FindBy(id="input-username")
 	private WebElement userName; 
 	
 	@FindBy(id="input-password")
 	private WebElement password;
 	
 	@FindBy(xpath="//i[@class='fa fa-key']/..")
-	private WebElement loginBtn; 
+	private WebElement loginBtn; */
 	
 	@FindBy(xpath="//i[@class='fa fa-shopping-cart fa-fw']/..")
 	private WebElement cart; 
@@ -57,7 +57,7 @@ public class UniformPOM {
 	@FindBy(id="input-return-id")
 	private WebElement orderReturn_ID; 
 	
-	public void sendUserName(String userName) {
+	/*public void sendUserName(String userName) {
 		this.userName.clear();
 		this.userName.sendKeys(userName);
 	}
@@ -69,33 +69,38 @@ public class UniformPOM {
 	
 	public void clickLoginBtn() {
 		this.loginBtn.click(); 		
-	}
+	}*/
 	
 	public String create_xpath(){
 		String firstorder = null;
 		if(this.orderID.getText() != null){
 			firstorder = "//*[@id='button-delete" + this.orderID.getText() + "']";
-			System.out.println(firstorder);
 		}
 		return firstorder;
 	}
 	
 	public void cart_Order() {
-		WaitTypes waitElement = new WaitTypes(driver);
-		waitElement.waitForElement(this.cart, 40);
-		this.cart.click(); 
-		waitElement.waitForElement(this.Orders_link, 40);
-		this.Orders_link.click(); 
-		ApplicationMethods obj = new ApplicationMethods(driver);
-		WebElement selectordertodelete = obj.getElement("//*[@id='form-order']/div/table/tbody/tr[1]/td[1]/input[1]","xpath");
-		waitElement.waitForElement(selectordertodelete, 40);
-		// this.selectOrder.click();		
-		String OrdertoDeletePath = create_xpath();
-		WebElement ordertodelete = obj.getElement(OrdertoDeletePath,"xpath");
-		waitElement.waitForElement(ordertodelete, 40);
-		
-		ordertodelete.click();
-		obj.acceptalert();
+		try {
+			Thread.sleep(4000); 
+			WaitTypes waitElement = new WaitTypes(driver);
+			waitElement.waitForElement(this.cart, 40);
+			this.cart.click(); 
+			waitElement.waitForElement(this.Orders_link, 40);
+			this.Orders_link.click(); 
+			ApplicationMethods obj = new ApplicationMethods(driver);
+			WebElement selectordertodelete = obj.getElement("//*[@id='form-order']/div/table/tbody/tr[1]/td[1]/input[1]","xpath");
+			waitElement.waitForElement(selectordertodelete, 40);
+			// this.selectOrder.click();		
+			String OrdertoDeletePath = create_xpath();
+			WebElement ordertodelete = obj.getElement(OrdertoDeletePath,"xpath");
+			waitElement.waitForElement(ordertodelete, 40);
+			
+			ordertodelete.click();
+			obj.acceptalert();
+		} catch (InterruptedException e) {
+			System.out.println("Scenario to delete Order is having exception error.");
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -107,21 +112,18 @@ public class UniformPOM {
 			this.cart.click(); 
 			waitElement.waitForElement(this.RecurringOrders_link, 40);
 			this.RecurringOrders_link.click(); 		
-			System.out.println("RecurringOrders_link click");
 			
 			
 			waitElement.waitForElement(this.orderStatus, 40);
 			Select orderStatusDrpdwn = new Select(this.orderStatus);
 			orderStatusDrpdwn.selectByVisibleText("Active"); 
 			
-			System.out.println("orderStatus selected as Active");
-			
 			waitElement.waitForElement(this.filterbutton, 40);
-			System.out.println("filterbutton wait is completed");
+
 			this.filterbutton.click(); 
-			System.out.println("filterbutton click");
+
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Scenario to recurring Order Filtered is having exception error.");
 			e.printStackTrace();
 		}
 		
@@ -129,21 +131,25 @@ public class UniformPOM {
 	
 	
 	public void return_Order() {
-		WaitTypes waitElement = new WaitTypes(driver);
-		waitElement.waitForElement(this.cart, 40);
-		this.cart.click(); 
-		waitElement.waitForElement(this.retrunOrders_link, 40);
-		this.retrunOrders_link.click(); 		
-		System.out.println("retrunOrders_link click");
-		
-		
-		waitElement.waitForElement(this.orderReturn_ID, 40);
-		this.orderReturn_ID.sendKeys("229");
-		
-		waitElement.waitForElement(this.filterbutton, 40);
-		System.out.println("filterbutton wait is completed");
-		this.filterbutton.click(); 
-		System.out.println("filterbutton click");
+		try {
+			Thread.sleep(4000); 
+			WaitTypes waitElement = new WaitTypes(driver);
+			waitElement.waitForElement(this.cart, 40);
+			this.cart.click(); 
+			waitElement.waitForElement(this.retrunOrders_link, 40);
+			this.retrunOrders_link.click(); 		
+
+			
+			
+			waitElement.waitForElement(this.orderReturn_ID, 40);
+			this.orderReturn_ID.sendKeys("211");
+			
+			waitElement.waitForElement(this.filterbutton, 40);
+			this.filterbutton.click(); 
+		} catch (InterruptedException e) {
+			System.out.println("Scenario to return Order is having exception error."); 
+			e.printStackTrace();
+		}
 		
 	}
 	
