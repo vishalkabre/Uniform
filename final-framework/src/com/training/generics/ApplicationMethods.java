@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.training.pom.LoginPOM;
+import com.training.pom.UniformCategories_POM;
 import com.training.pom.UniformPOM;
 import com.training.pom.UniformProductReturns_POM;
 import com.training.pom.UniformRecurringOrders_POM;
@@ -21,6 +23,7 @@ public class ApplicationMethods {
 	private UniformOrder_POM uniformorderPOM; 
 	private UniformRecurringOrders_POM uniformrecurringorderPOM; 
 	private UniformProductReturns_POM uniformproductreturnPOM; 
+	private UniformCategories_POM uniformcategoriesPOM; 
 
 
 	public ApplicationMethods(WebDriver driver){
@@ -80,10 +83,19 @@ public class ApplicationMethods {
 		return getElementsAsList(locator, type).size() ==1;
 	}
 
+
 	public void acceptalert(){
 		Alert alerts = driver.switchTo().alert();
 		alerts.accept();
 	}
+	
+	public void scrollIntoView(WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+    }
 	
 	public void login(){
 		loginPOM = new LoginPOM(driver); 
@@ -98,6 +110,49 @@ public class ApplicationMethods {
 
 	}
 	
+	public void searchOrder(){
+		uniformorderPOM = new UniformOrder_POM(driver);
+		uniformorderPOM.search_Order();
+
+	}
+	
+	public void editOrder(){
+		uniformorderPOM = new UniformOrder_POM(driver);
+		uniformorderPOM.edit_Order();
+
+	}
+	
+	
+	public void create_categories(){
+		uniformcategoriesPOM = new UniformCategories_POM(driver);
+		uniformcategoriesPOM.create_categories();
+		
+		if(checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
+			WebElement element  = null;
+			element=getElement("//*[@id='content']/div[2]/div[1]","xpath");
+			
+			System.out.println(""+element.getText().substring(0, 37)+"");
+		}else{
+			System.out.println("Category is not created");
+		}
+		
+	}
+	
+	public void create_products(){
+		uniformcategoriesPOM = new UniformCategories_POM(driver);
+		uniformcategoriesPOM.create_products();
+		
+		if(checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
+			WebElement element  = null;
+			element=getElement("//*[@id='content']/div[2]/div[1]","xpath");
+			
+			System.out.println(""+element.getText().substring(0, 37)+"");
+		}else{
+			System.out.println("Category is not created");
+		}
+		
+	}
+
 	public void recurring_OrderFilter(){
 		uniformrecurringorderPOM = new UniformRecurringOrders_POM(driver); 
 		uniformrecurringorderPOM.recurring_Order();
