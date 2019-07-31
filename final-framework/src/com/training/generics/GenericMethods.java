@@ -3,15 +3,16 @@ package com.training.generics;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
  * 
- * @author Naveen
+ * @author Vishal
  * @see this class will help when you want to do custom business logic, since  in POM we dont do 
  * 			dynamic elements available, when you want to iterate the table/accordion etc 
- * @since 17-Dec-2018 
+ * 
  */
 public class GenericMethods {
 	WebDriver driver ; 
@@ -82,4 +83,13 @@ public class GenericMethods {
 	public boolean checkSingleEntry(String locator, String type){
 		return getElementsAsList(locator, type).size() ==1;
 	}
+	//   Method is used for scroll in page for webelement 
+	public void scrollIntoView(WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+    }
+	
 }

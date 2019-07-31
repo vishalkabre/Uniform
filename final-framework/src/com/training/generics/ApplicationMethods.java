@@ -142,14 +142,7 @@ public class ApplicationMethods {
 		uniformcategoriesPOM = new UniformCategories_POM(driver);
 		uniformcategoriesPOM.create_products();
 		
-		if(checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
-			WebElement element  = null;
-			element=getElement("//*[@id='content']/div[2]/div[1]","xpath");
-			
-			System.out.println(""+element.getText().substring(0, 37)+"");
-		}else{
-			System.out.println("Category is not created");
-		}
+
 		
 	}
 

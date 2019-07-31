@@ -37,6 +37,9 @@ public class UniformCategories_POM {
 	@FindBy(id="input-meta-title1")
 	private WebElement meta_tag;
 	
+	@FindBy(id="input-meta-description1")
+	private WebElement meta_tag_description;
+
 	@FindBy(xpath="//*[@id='content']/div[1]/div/div/button/i") 
 	private WebElement add_button; 
 	
@@ -74,13 +77,16 @@ public class UniformCategories_POM {
 			this.add_link.click();
 			
 			waitElement.waitForElement(this.categoryname, 40);
-			this.categoryname.sendKeys("abcd");
+			this.categoryname.sendKeys("Sports Uniform");
 
 			waitElement.waitForElement(this.categorydescription, 40);
-			this.categorydescription.sendKeys("categorydescription");
+			this.categorydescription.sendKeys("Uniform for Sports");
 			
 			waitElement.waitForElement(this.meta_tag, 40);
-			this.meta_tag.sendKeys("meta_tag");
+			this.meta_tag.sendKeys("Sports Uniform");
+
+			waitElement.waitForElement(this.meta_tag_description, 40);
+			this.meta_tag_description.sendKeys("Uniform for Sports");
 
 			waitElement.waitForElement(this.add_button, 40);
 			this.add_button.click();
