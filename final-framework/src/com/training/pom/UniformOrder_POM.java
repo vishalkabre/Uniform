@@ -168,7 +168,7 @@ public class UniformOrder_POM {
 				}
 				
 			}
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			
 			waitElement.waitForElement(this.remove_button, 40);
 			obj.scrollIntoView(this.remove_button);
@@ -215,6 +215,123 @@ public class UniformOrder_POM {
 		}
 	}
 	
+	
+	public void editmultiple_Order() {
+		try {
+			Thread.sleep(1000); 
+			
+			WaitTypes waitElement = new WaitTypes(driver);
+			/*waitElement.waitForElement(this.cart, 40);
+			this.cart.click(); 
+			waitElement.waitForElement(this.Orders_link, 40);
+			this.Orders_link.click(); */
+			
+			waitElement.waitForElement(this.editpage, 40);
+			this.editpage.click(); 
+			ApplicationMethods obj = new ApplicationMethods(driver);
+			
+			waitElement.waitForElement(this.continue_button, 40);
+			obj.scrollIntoView(this.continue_button);
+			
+			Thread.sleep(1000);
+			
+			if(this.continue_button.isEnabled()){
+				
+			//	this.continue_button.click(); 
+				
+				if(obj.checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
+					waitElement.waitForElement(this.continue_button, 40);
+					
+					obj.scrollIntoView(this.continue_button);
+					this.continue_button.click();
+				}	
+				
+				else{
+					if(this.continue_button.isDisplayed()){
+					waitElement.waitForElement(this.continue_button, 40);
+					
+					obj.scrollIntoView(this.continue_button);
+					this.continue_button.click(); 
+					}
+				}
+				
+			}
+			Thread.sleep(1000);
+			
+			
+			
+			waitElement.waitForElement(this.remove_button, 40);
+			
+			if(this.remove_button.isDisplayed()){
+				obj.scrollIntoView(this.remove_button);
+				this.remove_button.click();
+				//System.out.println("removed");
+			}
+			waitElement.waitForElement(this.inputproduct, 40);
+			this.inputproduct.click();
+			this.inputproduct.clear();
+			this.inputproduct.sendKeys("Re");			
+			waitElement.waitForElement(this.productadd, 40);
+			obj.scrollIntoView(this.productadd);
+			this.productadd.click();
+			
+			this.inputquantity.clear();
+			this.inputquantity.sendKeys("1");
+			waitElement.waitForElement(this.buttonproductadd, 40);
+			obj.scrollIntoView(this.buttonproductadd);
+			this.buttonproductadd.click();
+			Thread.sleep(4000); 
+			
+			waitElement.waitForElement(this.button_cart, 40);
+			obj.scrollIntoView(this.button_cart);
+			this.button_cart.click();
+
+			waitElement.waitForElement(this.button_address, 40);
+			obj.scrollIntoView(this.button_address);
+			this.button_address.click();
+			
+			waitElement.waitForElement(this.buttonshippingaddress, 40);
+			obj.scrollIntoView(this.buttonshippingaddress);
+			this.buttonshippingaddress.click();
+			waitElement.waitForElement(this.inputshippingmethod, 40);
+			obj.scrollIntoView(this.inputshippingmethod);
+			Select ShippingMethod = new Select(this.inputshippingmethod);
+			ShippingMethod.selectByValue("free.free");
+			waitElement.waitForElement(this.button_save, 40);
+			obj.scrollIntoView(this.button_save);
+			this.button_save.click();
+			
+		} catch (InterruptedException e) {
+			System.out.println("Scenario to edit Order is having exception error.");
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void searchorder_OrderID(String OrderID) {
+		try {
+			Thread.sleep(4000);
+			
+			WaitTypes waitElement = new WaitTypes(driver);
+			waitElement.waitForElement(this.cart, 40);
+			this.cart.click(); 
+			waitElement.waitForElement(this.Orders_link, 40);
+			this.Orders_link.click(); 
+			
+			waitElement.waitForElement(this.input_OrderId, 40);
+			this.input_OrderId.sendKeys(OrderID);
+			
+			waitElement.waitForElement(this.filterbutton, 40);
+			this.filterbutton.click(); 
+			Thread.sleep(4000); 
+			editmultiple_Order();
+		}catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+			
+			
+	}
 	
 	public void search_Order() {
 		

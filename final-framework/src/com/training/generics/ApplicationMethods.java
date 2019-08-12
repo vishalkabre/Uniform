@@ -119,9 +119,22 @@ public class ApplicationMethods {
 	public void editOrder(){
 		uniformorderPOM = new UniformOrder_POM(driver);
 		uniformorderPOM.edit_Order();
-
 	}
 	
+	public void editmultiple_Order(){
+		uniformorderPOM = new UniformOrder_POM(driver);
+		uniformorderPOM.searchorder_OrderID("390");
+		
+		System.out.println("390 order edit is completed ");
+	//	uniformorderPOM.searchorder_OrderID("389");
+		
+	//	System.out.println("389 order edit is completed ");
+	}
+
+	public void db_Order(){
+		DataBaseTest database_record = new DataBaseTest();
+		database_record.databaseDetails();
+	}
 	
 	public void create_categories(){
 		uniformcategoriesPOM = new UniformCategories_POM(driver);
@@ -138,6 +151,15 @@ public class ApplicationMethods {
 		
 	}
 	
+	public void create_multiplecategories(){
+		uniformcategoriesPOM = new UniformCategories_POM(driver);
+	
+		uniformcategoriesPOM.create_multiplecategories("Sports Uniform","Uniform for Sports","Sports Uniform","Uniform for Sports");
+		
+		uniformcategoriesPOM.create_multiplecategories("Fancy wear","Dress for Smart People","Fancy wear","Dress for Smart People");
+			
+	}
+	
 	public void create_products(){
 		uniformcategoriesPOM = new UniformCategories_POM(driver);
 		uniformcategoriesPOM.create_products();
@@ -146,6 +168,17 @@ public class ApplicationMethods {
 		
 	}
 
+	
+	public void create_multipleproducts(){
+		uniformcategoriesPOM = new UniformCategories_POM(driver);
+		uniformcategoriesPOM.create_multipleproducts("Sports Wear","Sports wear description","Sports wear (8-10)","SPU-03");
+		
+		uniformcategoriesPOM.create_multipleproducts("Fancy wear","Dress for Smart People","Fancy wear","SPU-03");
+
+		
+	}
+
+	
 	public void recurring_OrderFilter(){
 		uniformrecurringorderPOM = new UniformRecurringOrders_POM(driver); 
 		uniformrecurringorderPOM.recurring_Order();

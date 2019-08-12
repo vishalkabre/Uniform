@@ -100,7 +100,55 @@ public class UniformCategories_POM {
 		
 		
 	}
+
+	
+	public void create_multiplecategories(String categoryname,String categorydescription,String meta_tag,String meta_tag_description){
+		try {
+			Thread.sleep(4000);
+			ApplicationMethods obj = new ApplicationMethods(driver);
+			
+			WaitTypes waitElement = new WaitTypes(driver);
+			waitElement.waitForElement(this.catalog, 40);
+			this.catalog.click(); 
+			waitElement.waitForElement(this.categories_link, 40);
+			this.categories_link.click(); 
+			waitElement.waitForElement(this.add_link, 40);
+			this.add_link.click();
+			
+			waitElement.waitForElement(this.categoryname, 40);
+			this.categoryname.sendKeys(categoryname);
+
+			waitElement.waitForElement(this.categorydescription, 40);
+			this.categorydescription.sendKeys(categorydescription);
+			
+			waitElement.waitForElement(this.meta_tag, 40);
+			this.meta_tag.sendKeys(meta_tag);
+
+			waitElement.waitForElement(this.meta_tag_description, 40);
+			this.meta_tag_description.sendKeys(meta_tag_description);
+
+			waitElement.waitForElement(this.add_button, 40);
+			this.add_button.click();
+
+			Thread.sleep(4000);
+			
+			if(obj.checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
+				
+				WebElement element  = null;
+				element=obj.getElement("//*[@id='content']/div[2]/div[1]","xpath");
+				System.out.println("Category :"+categoryname+" is created \t" +element.getText().substring(0, 37)+"");
+			}else{
+				System.out.println("Category is not created");
+			}
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
+		
+	}
+	
 	public void create_products(){
 		try {
 			Thread.sleep(4000);
@@ -134,10 +182,11 @@ public class UniformCategories_POM {
 			
 			waitElement.waitForElement(this.products_selectcategory_link, 40);
 			this.products_selectcategory_link.click();
-			
+			Thread.sleep(1000);
 			
 			waitElement.waitForElement(this.products_selectcategoryname_link, 40);
 			this.products_selectcategoryname_link.click();
+			Thread.sleep(1000);
 			waitElement.waitForElement(this.add_button, 40);
 			this.add_button.click();
 
@@ -159,4 +208,65 @@ public class UniformCategories_POM {
 		
 	}
 
+	public void create_multipleproducts(String categoryname,String categorydescription,String meta_tag,String input_model){
+		try {
+			Thread.sleep(4000);
+			ApplicationMethods obj = new ApplicationMethods(driver);
+
+			WaitTypes waitElement = new WaitTypes(driver);
+			waitElement.waitForElement(this.catalog, 40);
+			this.catalog.click(); 
+			waitElement.waitForElement(this.products_link, 40);
+			this.products_link.click(); 
+			waitElement.waitForElement(this.add_link, 40);
+			this.add_link.click();
+			
+			waitElement.waitForElement(this.categoryname, 40);
+			this.categoryname.sendKeys(categoryname);
+
+			waitElement.waitForElement(this.categorydescription, 40);
+			this.categorydescription.sendKeys(categorydescription);
+			
+			waitElement.waitForElement(this.meta_tag, 40);
+			this.meta_tag.sendKeys(meta_tag);
+
+			waitElement.waitForElement(this.products_datatab_link, 40);
+			this.products_datatab_link.click();
+			
+			waitElement.waitForElement(this.input_model, 40);
+			this.input_model.sendKeys(input_model);
+			
+			waitElement.waitForElement(this.products_linktab_link, 40);
+			this.products_linktab_link.click();
+			
+			waitElement.waitForElement(this.products_selectcategory_link, 40);
+			this.products_selectcategory_link.click();
+			
+			
+			waitElement.waitForElement(this.products_selectcategoryname_link, 40);
+			this.products_selectcategoryname_link.click();
+			waitElement.waitForElement(this.add_button, 40);
+			this.add_button.click();
+
+			Thread.sleep(4000);
+			
+			if(obj.checkSingleEntry("//*[@id='content']/div[2]/div[1]", "xpath")){
+				WebElement element  = null;
+				element=obj.getElement("//*[@id='content']/div[2]/div[1]","xpath");
+				
+				System.out.println("Product :"+categoryname+" is created \t"+element.getText().substring(0, 37)+"");
+			}else{
+				System.out.println("Product category is not created");
+			}
+			
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+	}
+	
+	
 }
